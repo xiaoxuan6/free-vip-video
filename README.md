@@ -14,8 +14,8 @@ docker-compose up -d
 ## b、使用镜像
 
 ```
-docker pull ghcr.io/xiaoxuan6/free_vip:latest
-docker run --name free -p 80:80 -d ghcr.io/xiaoxuan6/free_vip:latest
+docker pull ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest
+docker run --name free -p 80:80 -d ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest
 ```
 
 # 捐赠
