@@ -4,10 +4,18 @@
 
 # 项目运行
 
+## a、克隆本项目 
 克隆本项目并执行 `docker` 然后访问 `ip`, 需要域名自行解析
 
 ```docker
 docker-compose up -d
+```
+
+## b、使用镜像
+
+```
+docker pull ghcr.io/xiaoxuan6/free_vip:latest
+docker run --name free -p 80:80 -d ghcr.io/xiaoxuan6/free_vip:latest
 ```
 
 # 捐赠

@@ -1,0 +1,29 @@
+name: "build image"
+
+on:
+  push:
+    tags:
+      - "v.*"
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tag version'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.repository == 'xiaoxuan6/free-vip-video'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build
+        env:
+          DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          echo "输出版本号：$VERSION"
+          docker build -t ghcr.io/xiaoxuan6/free_vip:latest .
+          docker tag ghcr.io/xiaoxuan6/free_vip:latest ghcr.io/xiaoxuan6/free_vip:$VERSION
+          docker login ghcr.io -u ${{ github.actor }} -p $DOCKER_TOKEN
+          docker push ghcr.io/xiaoxuan6/free_vip:latest
+          docker push ghcr.io/xiaoxuan6/free_vip:$VERSION
