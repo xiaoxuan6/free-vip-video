@@ -6,7 +6,7 @@ on:
       - "v*"
   workflow_dispatch:
     inputs:
-      tags:
+      tag:
         description: 'tag version'
 
 jobs:
@@ -18,12 +18,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Build
         env:
-          DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          EVENT_NAME=${{ github.event_name }}
+          if [[ $EVENT_NAME != 'workflow_dispatch' ]]; then
+            VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          else
+            VERSION=${{ github.event.inputs.tag }}
+          fi
           echo "输出版本号：$VERSION"
           docker build -t ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest .
-          docker login ghcr.io -u ${{ github.actor }} -p $DOCKER_TOKEN
+          docker login ghcr.io -u ${{ github.actor }} -p $GITHUB_TOKEN
           docker push ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest
           docker tag ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest ghcr.io/xiaoxuan6/free-vip-video/free_vip:$VERSION
           docker push ghcr.io/xiaoxuan6/free-vip-video/free_vip:$VERSION
