@@ -9,11 +9,26 @@
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="icon" type="image/png" sizes="32x32" href="./favicon.ico">
 </head>
+<style>
+	.layui-inputs, .layui-textarea {
+		width: 90%;
+		padding-left: 10px;
+		height: 38px;
+		line-height: 38px;
+		line-height: 36px\9;
+		border: 1px solid #e6e6e6;
+		background-color: #fff;
+		border-radius: 2px;
+	}
+</style>
 <body>
 <div class="main">
 	<div class="logo">Free VIP视频解析</div>
-	<input type="text" required  lay-verify="required" placeholder="请输入播放地址后解析,支持爱奇艺,优酷,土豆等VIP视频播放地址" autocomplete="off" class="layui-input">
-	<button class="layui-btn" style="float: right;margin-top: -38px;position: relative;" onclick="show();">解析</button>
+	<select class="layui-inputs select_option" style="width: 15%">
+		<option value="">选择渠道</option>
+	</select>
+	<input type="text" required  lay-verify="required" placeholder="请输入播放地址后解析,支持爱奇艺,优酷,土豆等VIP视频播放地址" autocomplete="off" class="layui-inputs" style="width: 70%;margin-right: 8%">
+	<button class="layui-btn" style="float: right;margin-top: -40px;position: relative;" onclick="show();">解析</button>
 	<footer>
 		<span id="busuanzi_container_site_pv" style="margin: 10px auto;">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span> | <a href="https://github.com/xiaoxuan6/free-vip-video" target="_blank">源码地址：https://github.com/xiaoxuan6/free-vip-video</a>
 	</footer>
