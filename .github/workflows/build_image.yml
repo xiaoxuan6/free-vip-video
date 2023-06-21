@@ -4,11 +4,6 @@ on:
   push:
     tags:
       - "v*"
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'tag version'
-        required: true
 
 jobs:
   build:
@@ -21,15 +16,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          EVENT_NAME=${{ github.event_name }}
-          if [[ $EVENT_NAME != 'workflow_dispatch' ]]; then
-            VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          else
-            VERSION=${{ github.event.inputs.tag }}
-          fi
+          VERSION=${{ github.event.inputs.tag }}
           echo "输出版本号：$VERSION"
           docker build -t ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest .
           docker login ghcr.io -u ${{ github.actor }} -p $GITHUB_TOKEN
           docker push ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest
           docker tag ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest ghcr.io/xiaoxuan6/free-vip-video/free_vip:$VERSION
           docker push ghcr.io/xiaoxuan6/free-vip-video/free_vip:$VERSION
+          docker logout
