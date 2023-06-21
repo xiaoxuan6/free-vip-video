@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          VERSION=${{ github.event.inputs.tag }}
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           echo "输出版本号：$VERSION"
           docker build -t ghcr.io/xiaoxuan6/free-vip-video/free_vip:latest .
           docker login ghcr.io -u ${{ github.actor }} -p $GITHUB_TOKEN
