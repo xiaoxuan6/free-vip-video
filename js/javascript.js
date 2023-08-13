@@ -10,9 +10,9 @@ function start() {
         let options = $('.select_option option:selected').val();
         let uri = '';
         if (options == '' || options == 'wmxz') {
-            uri = '://www.wmxz.wang/admin.php';
+            uri = '://jx.jsonplayer.com/player/';
         } else {
-            uri = '://okjx.cc/';
+            uri = '://bd.jx.cn/';
         }
         if (location.protocol === 'https:') {
             var schedule = 'https'
@@ -42,7 +42,7 @@ function show() {
     layui.use("layer", function() {
         var index = layer.open({
             title: "一路陪伴，捐助",
-            content: '<span style="display:block;text-align:center;font-size:20px;">支付宝扫一扫</span><img style="display:block;margin:0 auto;height:200px;width:200px;" src="https://xiaoxuan6.github.io/images/donate/alipayimg.jpg"><span style="display:block;font-size:14px;text-align:center;margin-top:10px;">不捐助也可播放，感谢捐助</span>',
+            content: '<span style="display:block;text-align:center;font-size:20px;">支付宝扫一扫</span><img style="display:block;margin:0 auto;height:200px;width:200px;" src="https://xiaoxuan6.github.io/images/donate/alipayimg.jpg"><span style="display:block;font-size:14px;text-align:center;margin-top:10px;">感谢捐助</span>',
             area: "220px",
             scrollbar: false,
             btn: ["直接播放"],
